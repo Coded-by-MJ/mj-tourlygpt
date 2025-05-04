@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Cart {
+  id             String     @id
+  clerkId        String
+  numItemsInCart Int        @default(0)
+  cartTotal      Int        @default(0)
+  shipping       Int        @default(5)
+  tax            Int        @default(0)
+  taxRate        Float      @default(0.1)
+  orderTotal     Int        @default(0)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime
+  CartItem       CartItem[]
+}
+
+model CartItem {
+  id        String   @id
+  productId String
+  cartId    String
+  amount    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  Product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  id        String   @id
+  clerkId   String
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id         String   @id
+  clerkId    String
+  products   Int      @default(0)
+  orderTotal Int      @default(0)
+  tax        Int      @default(0)
+  shipping   Int      @default(0)
+  email      String
+  isPaid     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+}
+
+model Product {
+  id          String     @id
+  name        String
+  company     String
+  description String
+  featured    Boolean
+  image       String
+  price       Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime
+  clerkId     String
+  CartItem    CartItem[]
+  Favorite    Favorite[]
+  Review      Review[]
+}
+
+model Review {
+  id             String   @id
+  clerkId        String
+  rating         Int
+  comment        String
+  authorName     String
+  authorImageUrl String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime
+  productId      String
+  Product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Tour {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  city        String
+  country     String
+  title       String
+  description String   @db.Text
+  image       String?  @db.Text
+  stops       Json
+
+  @@unique([city, country])
+}
