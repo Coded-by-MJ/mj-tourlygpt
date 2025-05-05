@@ -4,6 +4,22 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
+// app/layout.tsx
+export const metadata = {
+  metadataBase: new URL("https://tourlygpt.miracleibharokhonre.com"),
+  title: {
+    default: "TourlyGPT",
+    template: "%s | TourlyGPT",
+  },
+  openGraph: {
+    images: "/tourly.png",
+    siteName: "TourlyGPT",
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
