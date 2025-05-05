@@ -9,11 +9,13 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
-          className="drawer-button lg:hidden fixed top-6 right-6"
+          className="drawer-button p-4 flex justify-end items-center lg:hidden "
         >
-          <FaBarsStaggered className="w-8 h-8 text-primary" />
+          <FaBarsStaggered className="w-8 h-8  text-primary" />
         </label>
-        <div className="bg-base-200 px-8 py-12 min-h-screen">{children}</div>
+        <section className="bg-base-200 px-6 py-12 min-h-screen">
+          {children}
+        </section>
       </div>
       <div className="drawer-side">
         <label

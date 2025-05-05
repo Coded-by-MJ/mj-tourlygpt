@@ -15,4 +15,5 @@ export interface TourObj {
   image?: string;
   description: string;
   stops: string[];
+  slug: string;
 }

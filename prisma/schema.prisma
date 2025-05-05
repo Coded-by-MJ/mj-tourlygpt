@@ -86,6 +86,7 @@ model Review {
 
 model Tour {
   id          String   @id @default(uuid())
+  slug        String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   city        String
@@ -96,4 +97,9 @@ model Tour {
   stops       Json
 
   @@unique([city, country])
+}
+
+model Token {
+  clerkId String @id
+  tokens  Int    @default(1200)
 }

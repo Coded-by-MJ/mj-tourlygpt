@@ -6,13 +6,18 @@ import { FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   createNewTour,
+  fetchUserTokensById,
   generateTourResponse,
   getExistingTour,
+  subtractTokens,
 } from "../utils/action";
-import { TourInput, TourObj } from "../utils/types";
+import { TourInput } from "../utils/types";
+import { generateSlug } from "../utils";
+import { useAuth } from "@clerk/nextjs";
 
 const NewTour = () => {
   const queryClient = useQueryClient();
+  const { userId } = useAuth();
   const {
     mutate,
     isPending,
@@ -23,24 +28,44 @@ const NewTour = () => {
       if (existingTour) {
         return existingTour;
       }
-      const newTour = await generateTourResponse(destination);
-      if (newTour) {
-        await createNewTour(newTour);
-        queryClient.invalidateQueries({ queryKey: ["tours"] });
-        return newTour;
+      const currentTokens = await fetchUserTokensById(userId);
+      if (currentTokens < 300) {
+        toast.error("Token balance too low...");
+        return;
       }
-      toast.error("No matching city found...");
-      return null;
+
+      const { generatedTour, tokens } = await generateTourResponse(destination);
+
+      if (!generatedTour) {
+        toast.error("No matching city found...");
+        return null;
+      }
+      const { slug, city, country } = generateSlug(generatedTour);
+      const newTour = {
+        title: generatedTour.title,
+        description: generatedTour.description,
+        stops: generatedTour.stops,
+        image: generatedTour.image,
+        city,
+        country,
+        slug,
+      };
+      await createNewTour(newTour);
+      queryClient.invalidateQueries({ queryKey: ["tours"] });
+      const newTokens = await subtractTokens(userId, tokens);
+      toast.success(`${newTokens} tokens remaining...`);
+      return newTour;
     },
   });
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const destination = Object.fromEntries(
-      formData.entries()
-    ) as unknown as TourInput;
-
+    const formObj = Object.fromEntries(formData.entries()) as unknown as {
+      city: string;
+      country: string;
+    };
+    const destination: TourInput = generateSlug(formObj);
     mutate(destination);
   };
 

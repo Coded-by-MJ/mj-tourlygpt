@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 const HomePage = () => {
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -11,6 +12,7 @@ const HomePage = () => {
             own — complete with AI-crafted images and descriptions based on any
             city or country.
           </p>
+
           <Link href="/chat" className="btn rounded-md btn-secondary ">
             Get Started
           </Link>
