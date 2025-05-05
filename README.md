@@ -22,7 +22,7 @@ TourlyGPT is an AI-powered travel companion that lets users chat, create, and ex
 - TypeScript
 - Next.js
 - Supabase
-- Replicate API (for image generation)
+- Unsplash API (for image generation)
 
 ## Live Link
 
