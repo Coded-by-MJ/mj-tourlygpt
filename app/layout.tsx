@@ -11,9 +11,14 @@ export const metadata = {
     default: "TourlyGPT",
     template: "%s | TourlyGPT",
   },
+  description:
+    "Your conversational AI companion for travel and beyond. Chat freely, explore city tours created by others, or generate your own — complete with AI-crafted images and descriptions based on any city or country.",
   openGraph: {
     images: "/tourly.png",
     siteName: "TourlyGPT",
+    description:
+      "Discover and create custom AI-generated city tours with TourlyGPT. Chat with your travel assistant, explore community-made guides, and generate images and descriptions for any destination.",
+    url: "/",
   },
   alternates: {
     canonical: "/",
