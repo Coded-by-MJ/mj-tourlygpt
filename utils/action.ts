@@ -177,7 +177,10 @@ export const generateTourImage = async ({ city, country }: TourInput) => {
   }
 };
 
-export const fetchUserTokensById = async (clerkId: string) => {
+export const fetchUserTokensById = async (clerkId: string | null) => {
+  if (!clerkId) {
+    return;
+  }
   const result = await prisma.token.findUnique({
     where: {
       clerkId,
@@ -196,7 +199,10 @@ export const generateUserTokensForId = async (clerkId: string) => {
   return result?.tokens;
 };
 
-export const fetchOrGenerateTokens = async (clerkId: string) => {
+export const fetchOrGenerateTokens = async (clerkId: string | null) => {
+  if (!clerkId) {
+    return;
+  }
   const tokens = await fetchUserTokensById(clerkId);
   if (tokens) {
     return tokens;

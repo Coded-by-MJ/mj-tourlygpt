@@ -27,8 +27,8 @@ function Chat() {
         toast.error("Something went wrong");
         return;
       }
-      setMessages((prev) => [...prev, aiResponse.message]);
       const newTokens = await subtractTokens(userId, aiResponse.tokens);
+      setMessages((prev) => [...prev, aiResponse.message]);
       toast.success(`${newTokens} tokens remaining...`);
     },
   });
@@ -41,15 +41,15 @@ function Chat() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]">
-      <div>
+    <div className="min-h-[calc(100vh-6rem)] max-w-[800px] w-full grid grid-rows-[1fr_auto]">
+      <div className="w-full">
         {messages.map(({ role, content }, index) => {
           const avatar = role == "user" ? "👤" : "🤖";
           const bcg = role == "user" ? "bg-base-200" : "bg-base-100";
           return (
             <div
               key={index}
-              className={` ${bcg} flex py-6 -mx-8 px-8
+              className={` ${bcg} w-full flex py-6 -mx-8 px-8
                text-xl leading-loose border-b border-base-300`}
             >
               <span className="mr-4 ">{avatar}</span>
@@ -57,9 +57,9 @@ function Chat() {
             </div>
           );
         })}
-        {isPending && <span className="loading"></span>}
+        {isPending && <span className="loading loading-dots loading-lg"></span>}
       </div>
-      <form onSubmit={handleSubmit} className="max-w-4xl pt-12">
+      <form onSubmit={handleSubmit} className="w-full pt-12">
         <div className="join w-full">
           <input
             type="text"

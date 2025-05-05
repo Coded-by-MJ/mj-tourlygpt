@@ -17,7 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        elements: {
+          cardBox: "!w-full ",
+        },
+        variables: {
+          colorPrimary: "#242c39",
+        },
+      }}
+    >
       <html lang="en">
         <body className={inter.className}>
           <Providers>{children}</Providers>

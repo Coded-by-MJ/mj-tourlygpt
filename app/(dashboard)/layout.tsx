@@ -13,7 +13,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         >
           <FaBarsStaggered className="w-8 h-8  text-primary" />
         </label>
-        <section className="bg-base-200 px-6 py-12 min-h-screen">
+        <section className="bg-base-200 px-6  w-full flex items-start justify-center py-12 min-h-screen">
           {children}
         </section>
       </div>

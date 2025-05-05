@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LoadingIndicator from "./LoadingIndicator";
 
 const links = [
   { href: "/chat", title: "Chat" },
@@ -9,12 +10,16 @@ const links = [
 
 function NavLinks() {
   return (
-    <ul className="menu  text-base-content">
+    <ul className="menu w-full  text-base-content">
       {links.map((link) => {
         return (
           <li key={link.href}>
-            <Link href={link.href} className="capitalize">
-              {link.title}
+            <Link
+              href={link.href}
+              className="capitalize w-full flex items-center justify-between"
+            >
+              <span>{link.title}</span>
+              <LoadingIndicator />
             </Link>
           </li>
         );

@@ -4,7 +4,7 @@ import MemberProfile from "./MemberProfile";
 
 function Sidebar() {
   return (
-    <div className="px-4 grid-cols-1 w-80 min-h-full bg-base-300 py-12 grid grid-rows-[auto,1fr,auto] ">
+    <div className="px-4 grid-cols-1 w-80 min-h-full bg-base-300 py-12 grid grid-rows-[auto_1fr_auto] ">
       {/* first row */}
       <SidebarHeader />
       {/* second row */}

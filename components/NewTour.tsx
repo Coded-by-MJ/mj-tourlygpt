@@ -74,8 +74,8 @@ const NewTour = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="max-w-2xl">
+    <section className="flex w-full gap-16 flex-col items-start">
+      <form onSubmit={handleSubmit} className="max-w-2xl w-full">
         <h2 className=" mb-4">Select your dream destination</h2>
         <div className="join w-full">
           <input
@@ -97,8 +97,8 @@ const NewTour = () => {
           </button>
         </div>
       </form>
-      <div className="mt-16">{tour && <TourInfo tour={tour} />}</div>
-    </>
+      {tour && <TourInfo tour={tour} />}
+    </section>
   );
 };
 export default NewTour;

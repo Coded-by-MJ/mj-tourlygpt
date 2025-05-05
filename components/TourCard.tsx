@@ -2,7 +2,7 @@ import { Tour } from "@prisma/client";
 import Link from "next/link";
 
 function TourCard({ tour }: { tour: Tour }) {
-  const { city, slug, id, country } = tour;
+  const { city, slug, country } = tour;
   return (
     <Link
       href={`/tours/${slug}`}
