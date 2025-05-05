@@ -10,7 +10,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "/tours/new-tour",
+    canonical: "https://tourlygpt.miracleibharokhonre.com/tours/new-tour",
   },
   title: "Create Tour",
   description:
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Create Tour - Explore, Chat, and Plan AI-Powered Tours",
     description:
       "Discover and create custom AI-generated city tours with TourlyGPT. Chat with your travel assistant, explore community-made guides, and generate images and descriptions for any destination.",
-    url: "/tours/new-tour",
+    url: "https://tourlygpt.miracleibharokhonre.com/tours/new-tour",
     siteName: "TourlyGPT",
     images: [
       {
